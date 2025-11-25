@@ -3,6 +3,10 @@ export async function handler(event, context) {
   if (!url) {
     return {
       statusCode: 400,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Access-Control-Allow-Origin": "*"
+      },
       body: "Error: parameter 'url' is missing"
     };
   }
@@ -13,12 +17,19 @@ export async function handler(event, context) {
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
+      headers: { 
+        "Content-Type": "text/html; charset=utf-8",  // Изменено на text/html
+        "Access-Control-Allow-Origin": "*"
+      },
       body: text
     };
   } catch (err) {
     return {
       statusCode: 500,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Access-Control-Allow-Origin": "*"
+      },
       body: "Error fetching URL: " + err.message
     };
   }
